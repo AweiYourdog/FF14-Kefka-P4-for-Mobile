@@ -1,0 +1,513 @@
+<!-- 
+  出典 / Source:
+  https://x.com/Inorganicmki/status/2066830608060522561?s=20
+  Alpha (P3) ported from C# WPF by Claude
+-->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>UMAD P4 カンペ</title>
+    <style>
+        html, body {
+            margin: 0; padding: 0;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            width: 100vw; height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            box-sizing: border-box;
+            padding: 2px 6px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* ── Header ── */
+        .header-area {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            position: sticky;
+            top: 0;
+            background: #0f0f0f;
+            z-index: 100;
+            height: 40px;
+            gap: 6px;
+        }
+        .title {
+            font-size: 15px;
+            color: #ffcc00;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-shrink: 1;
+            min-width: 0;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+        .lang-btn {
+            background: #333;
+            color: #ccc;
+            border: 1px solid #555;
+            padding: 2px 7px;
+            border-radius: 3px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .lang-btn.active {
+            background: #ffcc00;
+            color: #000;
+            border-color: #fff;
+        }
+        .reset-btn {
+            background: #ff3333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ── Main grid ── */
+        #main {
+            display: grid;
+            grid-template-columns: 1fr 8px 1fr;
+            flex: 1;
+        }
+
+        /* ── Answer column ── */
+        .p3-sec {
+            font-size: 9px;
+            font-weight: bold;
+            color: #5BC8F5;
+            margin: 2px 0 1px 4px;
+        }
+        .p3-ans-row {
+            display: flex;
+            align-items: center;
+            margin: 2px 0;
+        }
+        .p3-num {
+            width: 20px;
+            text-align: right;
+            font-size: 10px;
+            font-weight: bold;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .p3-num.fire-num  { color: #FF6B35; }
+        .p3-num.water-num { color: #4DADFF; }
+        .p3-ans-box {
+            flex: 1;
+            background: #1c1c1c;
+            border: 1px solid #444;
+            border-radius: 3px;
+            height: 40px;
+            margin-left: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .p3-ans-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #3a3a3a;
+            text-align: center;
+        }
+        .p3-ans-text.has-val { color: #FFCC00; }
+        .p3-div { height: 1px; background: #333; margin: 3px 4px; }
+
+        /* ── Button column ── */
+        .p3-btn-col { padding: 0 2px; }
+        .p3-btn-sec {
+            font-size: 9px;
+            font-weight: bold;
+            color: #5BC8F5;
+            text-align: center;
+            margin: 2px 0 1px 0;
+        }
+        .p3-btn-row {
+            display: flex;
+            gap: 4px;
+            margin: 3px 0;
+        }
+        .p3-btn {
+            flex: 1;
+            height: 40px;
+            border: 1px solid #444;
+            background: #282828;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+        }
+        .p3-btn .dot-blue {
+            width: 26px; height: 26px;
+            background: #4DADFF;
+            border-radius: 50%;
+        }
+        .p3-btn .q-red {
+            font-size: 22px;
+            font-weight: 900;
+            color: #FF4D4D;
+        }
+        .p3-btn .btn-img {
+            height: 30px;
+            width: auto;
+            object-fit: contain;
+        }
+        .p3-half-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            margin: 3px 0;
+        }
+
+        /* Active states */
+        .p3-btn[data-btn="A"].active { background: #1A4A7A; }
+        .p3-btn[data-btn="B"].active { background: #5A2525; }
+        .p3-btn[data-btn="C"].active { background: #4DADFF; color: #000; }
+        .p3-btn[data-btn="D"].active { background: #4DADFF; color: #000; }
+        .p3-btn[data-btn="E"].active { background: #4DADFF; }
+        .p3-btn[data-btn="F"].active { background: #1A4A7A; }
+        .p3-btn[data-btn="G"].active { background: #5A2525; }
+        .p3-btn[data-btn="H"].active { background: #5A2525; }
+        .p3-btn[data-btn="I"].active { background: #1A4A7A; }
+        .p3-btn[data-btn="J"].active { background: #1A4A7A; }
+        .p3-btn[data-btn="K"].active { background: #5A2525; }
+        .p3-btn[data-btn="L"].active { background: #4DADFF; }
+        .p3-btn[data-btn="M"].active { background: #1A4A7A; }
+        .p3-btn[data-btn="N"].active { background: #5A2525; }
+        .p3-btn[data-btn="O"].active { background: #1A4A7A; }
+        .p3-btn[data-btn="P"].active { background: #5A2525; }
+        .p3-btn[data-btn="Q"].active { background: #1A4A7A; }
+        .p3-btn[data-btn="R"].active { background: #5A2525; }
+
+        /* ── Footer ── */
+        .footer-area {
+            margin-top: 15px;
+            padding: 15px 0;
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+        .footer-area a { color: #888; text-decoration: underline; }
+    </style>
+</head>
+<body class="lang-zh">
+
+    <div class="header-area">
+        <div class="title" id="ui-title">🤡 UMAD P4</div>
+        <div class="header-right">
+            <button class="lang-btn active" onclick="changeLang('zh')">ZH</button>
+            <button class="lang-btn"        onclick="changeLang('jp')">JP</button>
+            <button class="lang-btn"        onclick="changeLang('en')">EN</button>
+            <button class="reset-btn"       onclick="resetAll()">RESET</button>
+        </div>
+    </div>
+
+    <div id="main">
+
+        <!-- LEFT: Answer column -->
+        <div id="p3-ans-col">
+            <div class="p3-sec" data-p3key="p3-sec-bomb">炸彈</div>
+            <div class="p3-ans-row">
+                <div class="p3-num">1.</div>
+                <div class="p3-ans-box"><div class="p3-ans-text" id="ans1"></div></div>
+            </div>
+
+            <div class="p3-sec" data-p3key="p3-sec-early">早debuff</div>
+            <div class="p3-ans-row">
+                <div class="p3-num">2.</div>
+                <div class="p3-ans-box"><div class="p3-ans-text" id="ans2"></div></div>
+            </div>
+            <div class="p3-ans-row">
+                <div class="p3-num">3.</div>
+                <div class="p3-ans-box"><div class="p3-ans-text" id="ans3"></div></div>
+            </div>
+            <div class="p3-ans-row">
+                <div class="p3-num fire-num" id="num4label">火</div>
+                <div class="p3-ans-box"><div class="p3-ans-text" id="ans4"></div></div>
+            </div>
+
+            <div class="p3-div"></div>
+
+            <div class="p3-sec" data-p3key="p3-sec-late">晚debuff</div>
+            <div class="p3-ans-row">
+                <div class="p3-num">5.</div>
+                <div class="p3-ans-box"><div class="p3-ans-text" id="ans5"></div></div>
+            </div>
+            <div class="p3-ans-row">
+                <div class="p3-num">6.</div>
+                <div class="p3-ans-box"><div class="p3-ans-text" id="ans6"></div></div>
+            </div>
+            <div class="p3-ans-row">
+                <div class="p3-num water-num" id="num7label">水</div>
+                <div class="p3-ans-box"><div class="p3-ans-text" id="ans7"></div></div>
+            </div>
+
+            <div class="p3-sec" data-p3key="p3-sec-magic">魔法放出</div>
+            <div class="p3-ans-row">
+                <div class="p3-num">8.</div>
+                <div class="p3-ans-box"><div class="p3-ans-text" id="ans8"></div></div>
+            </div>
+        </div>
+
+        <!-- Spacer -->
+        <div></div>
+
+        <!-- RIGHT: Button column -->
+        <div class="p3-btn-col">
+            <div class="p3-btn-sec" data-p3key="p3-sec-gc1">GC1</div>
+            <div class="p3-btn-row">
+                <button class="p3-btn" data-btn="A" onclick="p3Click('A')"><div class="dot-blue"></div></button>
+                <button class="p3-btn" data-btn="B" onclick="p3Click('B')"><div class="q-red">?</div></button>
+            </div>
+            <div class="p3-btn-row">
+                <button class="p3-btn" data-btn="C" onclick="p3Click('C')" id="btnC">早</button>
+                <button class="p3-btn" data-btn="D" onclick="p3Click('D')" id="btnD">晚</button>
+            </div>
+            <div class="p3-half-row">
+                <button class="p3-btn" data-btn="E" onclick="p3Click('E')">⚡</button>
+                <div></div>
+            </div>
+
+            <div class="p3-div"></div>
+
+            <div class="p3-btn-sec" data-p3key="p3-sec-waterfire1">水火1</div>
+            <div class="p3-btn-row">
+                <button class="p3-btn" data-btn="F" onclick="p3Click('F')"><div class="dot-blue"></div></button>
+                <button class="p3-btn" data-btn="G" onclick="p3Click('G')"><div class="q-red">?</div></button>
+            </div>
+            <div class="p3-btn-row">
+                <button class="p3-btn" data-btn="I" onclick="p3Click('I')">💧</button>
+                <button class="p3-btn" data-btn="H" onclick="p3Click('H')">🔥</button>
+            </div>
+
+            <div class="p3-div"></div>
+
+            <div class="p3-btn-sec" data-p3key="p3-sec-gc2">GC2</div>
+            <div class="p3-btn-row">
+                <button class="p3-btn" data-btn="J" onclick="p3Click('J')"><div class="dot-blue"></div></button>
+                <button class="p3-btn" data-btn="K" onclick="p3Click('K')"><div class="q-red">?</div></button>
+            </div>
+            <div class="p3-half-row">
+                <button class="p3-btn" data-btn="L" onclick="p3Click('L')">⚡</button>
+                <div></div>
+            </div>
+
+            <div class="p3-div"></div>
+
+            <div class="p3-btn-sec" data-p3key="p3-sec-waterfire2">水火2</div>
+            <div class="p3-btn-row">
+                <button class="p3-btn" data-btn="M" onclick="p3Click('M')"><div class="dot-blue"></div></button>
+                <button class="p3-btn" data-btn="N" onclick="p3Click('N')"><div class="q-red">?</div></button>
+            </div>
+
+            <div class="p3-div"></div>
+
+            <div class="p3-btn-sec" data-p3key="p3-sec-thunder">雷直線</div>
+            <div class="p3-btn-row">
+                <button class="p3-btn" data-btn="O" onclick="p3Click('O')"><div class="dot-blue"></div></button>
+                <button class="p3-btn" data-btn="P" onclick="p3Click('P')"><div class="q-red">?</div></button>
+            </div>
+
+            <div class="p3-btn-sec" data-p3key="p3-sec-ice">冰扇形</div>
+            <div class="p3-btn-row">
+                <button class="p3-btn" data-btn="Q" onclick="p3Click('Q')"><div class="dot-blue"></div></button>
+                <button class="p3-btn" data-btn="R" onclick="p3Click('R')"><div class="q-red">?</div></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-area">
+        <span>Edit by <a href="https://x.com/AweiYourdog" target="_blank">AweiYourdog</a> | Source: <a href="https://x.com/Inorganicmki/status/2066830608060522561" target="_blank">@Inorganicmki</a></span>
+    </div>
+
+    <script>
+    const i18n = {
+        zh: {
+            "title": "🤡 UMAD P3",
+            "p3-sec-bomb": "炸彈", "p3-sec-early": "早debuff", "p3-sec-late": "晚debuff",
+            "p3-sec-magic": "魔法放出", "p3-sec-gc1": "GC1", "p3-sec-waterfire1": "水火1",
+            "p3-sec-gc2": "GC2", "p3-sec-waterfire2": "水火2",
+            "p3-sec-thunder": "雷直線", "p3-sec-ice": "冰扇形",
+            "p3-btn-c": "早", "p3-btn-d": "晚", "p3-num-4": "火", "p3-num-7": "水",
+            "p3-stop": "不要動", "p3-move": "動起來",
+            "p3-thunder-out": "雷散開", "p3-water-out": "水散開",
+            "p3-lookaway": "不要看", "p3-lookat": "要看",
+            "p3-out": "鋼鐵", "p3-in": "月環",
+            "p3-avoid-both": "都不要踩", "p3-cone": "踩扇形", "p3-line": "踩直線", "p3-both": "都踩"
+        },
+        jp: {
+            "title": "🤡 UMAD P3",
+            "p3-sec-bomb": "爆弾", "p3-sec-early": "早デバフ", "p3-sec-late": "遅デバフ",
+            "p3-sec-magic": "マジックアウト", "p3-sec-gc1": "GC1", "p3-sec-waterfire1": "水炎1",
+            "p3-sec-gc2": "GC2", "p3-sec-waterfire2": "水炎2",
+            "p3-sec-thunder": "直線", "p3-sec-ice": "扇",
+            "p3-btn-c": "早", "p3-btn-d": "遅", "p3-num-4": "炎", "p3-num-7": "水",
+            "p3-stop": "止まる", "p3-move": "動き続ける",
+            "p3-thunder-out": "雷散開", "p3-water-out": "水散開",
+            "p3-lookaway": "見ない", "p3-lookat": "見る",
+            "p3-out": "タケノコ", "p3-in": "ドーナツ",
+            "p3-avoid-both": "踏まない", "p3-cone": "扇踏む", "p3-line": "線踏む", "p3-both": "両方踏む"
+        },
+        en: {
+            "title": "🤡 UMAD P3",
+            "p3-sec-bomb": "Bomb", "p3-sec-early": "Short Debuffs", "p3-sec-late": "Long Debuffs",
+            "p3-sec-magic": "Mana Release", "p3-sec-gc1": "GC1", "p3-sec-waterfire1": "Entropy/Fluid 1",
+            "p3-sec-gc2": "GC2", "p3-sec-waterfire2": "Entropy/Fluid 2",
+            "p3-sec-thunder": "Line", "p3-sec-ice": "Cone",
+            "p3-btn-c": "S", "p3-btn-d": "L", "p3-num-4": "4.", "p3-num-7": "7.",
+            "p3-stop": "STOP", "p3-move": "MOVE",
+            "p3-thunder-out": "Lightning Out", "p3-water-out": "Water Out",
+            "p3-lookaway": "Look Away", "p3-lookat": "Look At",
+            "p3-out": "Out", "p3-in": "In",
+            "p3-avoid-both": "Avoid Both", "p3-cone": "Stand in Cone", "p3-line": "Stand in Line", "p3-both": "Both"
+        }
+    };
+
+    let currentLang = 'zh';
+
+    function changeLang(lang) {
+        currentLang = lang;
+        document.body.className = 'lang-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(btn =>
+            btn.classList.toggle('active', btn.innerText.toLowerCase() === lang));
+        const t = i18n[lang];
+        document.getElementById('ui-title').innerText = t['title'];
+        document.getElementById('btnC').innerText = t['p3-btn-c'];
+        document.getElementById('btnD').innerText = t['p3-btn-d'];
+        document.getElementById('num4label').innerText = t['p3-num-4'];
+        document.getElementById('num7label').innerText = t['p3-num-7'];
+        document.querySelectorAll('[data-p3key]').forEach(el => {
+            const v = t[el.dataset.p3key];
+            if (v !== undefined) el.innerText = v;
+        });
+        p3Recalculate();
+    }
+
+    /* ── P3 Logic ── */
+    const MUTEX_GROUPS = [
+        ['A','B'],['C','D'],['F','G'],['H','I'],['J','K'],['E','L'],['M','N']
+    ];
+    const GROUP_OP = ['O','P'];
+    const GROUP_QR = ['Q','R'];
+
+    const p3State = {
+        A:false,B:false,C:false,D:false,E:false,F:false,G:false,
+        H:false,I:false,J:false,K:false,L:false,M:false,N:false,
+        O:true, P:false, Q:true, R:false
+    };
+
+    function p3Click(name) {
+        if (GROUP_OP.includes(name) || GROUP_QR.includes(name)) {
+            handleDefaultGroup(name, GROUP_OP.includes(name) ? GROUP_OP : GROUP_QR);
+        } else {
+            if (p3State[name]) { p3State[name] = false; }
+            else {
+                for (const grp of MUTEX_GROUPS)
+                    if (grp.includes(name)) grp.forEach(g => p3State[g] = false);
+                p3State[name] = true;
+            }
+        }
+        p3Recalculate();
+        p3Render();
+    }
+
+    function handleDefaultGroup(name, group) {
+        if (p3State[name]) {
+            if (name === group[0]) return;
+            p3State[name] = false;
+            p3State[group[0]] = true;
+        } else {
+            group.forEach(g => p3State[g] = false);
+            p3State[name] = true;
+        }
+    }
+
+    const is = n => p3State[n];
+    const T  = k => (i18n[currentLang] || i18n.zh)[k] || '';
+
+    function p3Recalculate() {
+        const ans = Array(9).fill('');
+        if      (is('E')&&is('A')) ans[1]=T('p3-stop');
+        else if (is('E')&&is('B')) ans[1]=T('p3-move');
+        else if (is('L')&&is('J')) ans[1]=T('p3-stop');
+        else if (is('L')&&is('K')) ans[1]=T('p3-move');
+
+        if      (is('C')&&is('A')) ans[2]=T('p3-thunder-out');
+        else if (is('C')&&is('B')) ans[2]=T('p3-water-out');
+        else if (is('D')&&is('J')) ans[2]=T('p3-thunder-out');
+        else if (is('D')&&is('K')) ans[2]=T('p3-water-out');
+
+        if      (is('A')) ans[3]=T('p3-lookaway');
+        else if (is('B')) ans[3]=T('p3-lookat');
+
+        if      (is('H')&&is('F')) ans[4]=T('p3-out');
+        else if (is('H')&&is('G')) ans[4]=T('p3-in');
+        else if (is('M')&&is('I')) ans[4]=T('p3-out');
+        else if (is('N')&&is('I')) ans[4]=T('p3-in');
+
+        if      (is('D')&&is('A')) ans[5]=T('p3-thunder-out');
+        else if (is('D')&&is('B')) ans[5]=T('p3-water-out');
+        else if (is('C')&&is('J')) ans[5]=T('p3-thunder-out');
+        else if (is('C')&&is('K')) ans[5]=T('p3-water-out');
+
+        if      (is('J')) ans[6]=T('p3-lookaway');
+        else if (is('K')) ans[6]=T('p3-lookat');
+
+        if      (is('I')&&is('F')) ans[7]=T('p3-in');
+        else if (is('I')&&is('G')) ans[7]=T('p3-out');
+        else if (is('M')&&is('H')) ans[7]=T('p3-in');
+        else if (is('N')&&is('H')) ans[7]=T('p3-out');
+
+        if      (is('O')&&is('Q')) ans[8]=T('p3-avoid-both');
+        else if (is('O')&&is('R')) ans[8]=T('p3-cone');
+        else if (is('P')&&is('Q')) ans[8]=T('p3-line');
+        else if (is('P')&&is('R')) ans[8]=T('p3-both');
+
+        for (let i = 1; i <= 8; i++) {
+            const el = document.getElementById('ans'+i);
+            if (el) { el.innerText = ans[i]; el.classList.toggle('has-val', ans[i] !== ''); }
+        }
+    }
+
+    function p3Render() {
+        document.querySelectorAll('.p3-btn[data-btn]').forEach(btn =>
+            btn.classList.toggle('active', !!p3State[btn.dataset.btn]));
+    }
+
+    function resetAll() {
+        'ABCDEFGHIJKLMN'.split('').forEach(n => p3State[n] = false);
+        p3State.O=true; p3State.P=false;
+        p3State.Q=true; p3State.R=false;
+        p3Recalculate();
+        p3Render();
+    }
+
+    p3Render();
+    p3Recalculate();
+    </script>
+</body>
+</html>
