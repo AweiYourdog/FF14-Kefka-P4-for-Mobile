@@ -1,14 +1,15 @@
 <!-- 
   出典 / Source:
   https://x.com/Inorganicmki/status/2066830608060522561?s=20
-  Alpha (P3) ported from C# WPF by Claude
+  Alpha (new P4 kanpe) ported from C# WPF by Claude
+  Claude is so fucking GOOD
 -->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>UMAD P4 カンペ</title>
+    <title>DMU P4 カンペ</title>
     <style>
         html, body {
             margin: 0; padding: 0;
@@ -91,18 +92,18 @@
         }
 
         /* ── Answer column ── */
-        .p3-sec {
+        .p4-sec {
             font-size: 9px;
             font-weight: bold;
             color: #5BC8F5;
             margin: 2px 0 1px 4px;
         }
-        .p3-ans-row {
+        .p4-ans-row {
             display: flex;
             align-items: center;
             margin: 2px 0;
         }
-        .p3-num {
+        .p4-num {
             width: 20px;
             text-align: right;
             font-size: 10px;
@@ -110,9 +111,9 @@
             color: #666;
             flex-shrink: 0;
         }
-        .p3-num.fire-num  { color: #FF6B35; }
-        .p3-num.water-num { color: #4DADFF; }
-        .p3-ans-box {
+        .p4-num.fire-num  { color: #FF6B35; }
+        .p4-num.water-num { color: #4DADFF; }
+        .p4-ans-box {
             flex: 1;
             background: #1c1c1c;
             border: 1px solid #444;
@@ -123,30 +124,30 @@
             align-items: center;
             justify-content: center;
         }
-        .p3-ans-text {
+        .p4-ans-text {
             font-size: 14px;
             font-weight: bold;
             color: #3a3a3a;
             text-align: center;
         }
-        .p3-ans-text.has-val { color: #FFCC00; }
-        .p3-div { height: 1px; background: #333; margin: 3px 4px; }
+        .p4-ans-text.has-val { color: #FFCC00; }
+        .p4-div { height: 1px; background: #333; margin: 3px 4px; }
 
         /* ── Button column ── */
-        .p3-btn-col { padding: 0 2px; }
-        .p3-btn-sec {
+        .p4-btn-col { padding: 0 2px; }
+        .p4-btn-sec {
             font-size: 9px;
             font-weight: bold;
             color: #5BC8F5;
             text-align: center;
             margin: 2px 0 1px 0;
         }
-        .p3-btn-row {
+        .p4-btn-row {
             display: flex;
             gap: 4px;
             margin: 3px 0;
         }
-        .p3-btn {
+        .p4-btn {
             flex: 1;
             height: 40px;
             border: 1px solid #444;
@@ -160,22 +161,22 @@
             font-weight: bold;
             color: white;
         }
-        .p3-btn .dot-blue {
+        .p4-btn .dot-blue {
             width: 26px; height: 26px;
             background: #4DADFF;
             border-radius: 50%;
         }
-        .p3-btn .q-red {
+        .p4-btn .q-red {
             font-size: 22px;
             font-weight: 900;
             color: #FF4D4D;
         }
-        .p3-btn .btn-img {
+        .p4-btn .btn-img {
             height: 30px;
             width: auto;
             object-fit: contain;
         }
-        .p3-half-row {
+        .p4-half-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4px;
@@ -183,24 +184,24 @@
         }
 
         /* Active states */
-        .p3-btn[data-btn="A"].active { background: #1A4A7A; }
-        .p3-btn[data-btn="B"].active { background: #5A2525; }
-        .p3-btn[data-btn="C"].active { background: #4DADFF; color: #000; }
-        .p3-btn[data-btn="D"].active { background: #4DADFF; color: #000; }
-        .p3-btn[data-btn="E"].active { background: #4DADFF; }
-        .p3-btn[data-btn="F"].active { background: #1A4A7A; }
-        .p3-btn[data-btn="G"].active { background: #5A2525; }
-        .p3-btn[data-btn="H"].active { background: #5A2525; }
-        .p3-btn[data-btn="I"].active { background: #1A4A7A; }
-        .p3-btn[data-btn="J"].active { background: #1A4A7A; }
-        .p3-btn[data-btn="K"].active { background: #5A2525; }
-        .p3-btn[data-btn="L"].active { background: #4DADFF; }
-        .p3-btn[data-btn="M"].active { background: #1A4A7A; }
-        .p3-btn[data-btn="N"].active { background: #5A2525; }
-        .p3-btn[data-btn="O"].active { background: #1A4A7A; }
-        .p3-btn[data-btn="P"].active { background: #5A2525; }
-        .p3-btn[data-btn="Q"].active { background: #1A4A7A; }
-        .p3-btn[data-btn="R"].active { background: #5A2525; }
+        .p4-btn[data-btn="A"].active { background: #1A4A7A; }
+        .p4-btn[data-btn="B"].active { background: #5A2525; }
+        .p4-btn[data-btn="C"].active { background: #4DADFF; color: #000; }
+        .p4-btn[data-btn="D"].active { background: #4DADFF; color: #000; }
+        .p4-btn[data-btn="E"].active { background: #4DADFF; }
+        .p4-btn[data-btn="F"].active { background: #1A4A7A; }
+        .p4-btn[data-btn="G"].active { background: #5A2525; }
+        .p4-btn[data-btn="H"].active { background: #5A2525; }
+        .p4-btn[data-btn="I"].active { background: #1A4A7A; }
+        .p4-btn[data-btn="J"].active { background: #1A4A7A; }
+        .p4-btn[data-btn="K"].active { background: #5A2525; }
+        .p4-btn[data-btn="L"].active { background: #4DADFF; }
+        .p4-btn[data-btn="M"].active { background: #1A4A7A; }
+        .p4-btn[data-btn="N"].active { background: #5A2525; }
+        .p4-btn[data-btn="O"].active { background: #1A4A7A; }
+        .p4-btn[data-btn="P"].active { background: #5A2525; }
+        .p4-btn[data-btn="Q"].active { background: #1A4A7A; }
+        .p4-btn[data-btn="R"].active { background: #5A2525; }
 
         /* ── Footer ── */
         .footer-area {
@@ -217,7 +218,7 @@
 <body class="lang-zh">
 
     <div class="header-area">
-        <div class="title" id="ui-title">🤡 UMAD P4</div>
+        <div class="title" id="ui-title">🤡 絕妖星 P4</div>
         <div class="header-right">
             <button class="lang-btn active" onclick="changeLang('zh')">ZH</button>
             <button class="lang-btn"        onclick="changeLang('jp')">JP</button>
@@ -229,47 +230,47 @@
     <div id="main">
 
         <!-- LEFT: Answer column -->
-        <div id="p3-ans-col">
-            <div class="p3-sec" data-p3key="p3-sec-bomb">炸彈</div>
-            <div class="p3-ans-row">
-                <div class="p3-num">1.</div>
-                <div class="p3-ans-box"><div class="p3-ans-text" id="ans1"></div></div>
+        <div id="p4-ans-col">
+            <div class="p4-sec" data-p4key="p4-sec-bomb">炸彈</div>
+            <div class="p4-ans-row">
+                <div class="p4-num">1.</div>
+                <div class="p4-ans-box"><div class="p4-ans-text" id="ans1"></div></div>
             </div>
 
-            <div class="p3-sec" data-p3key="p3-sec-early">早debuff</div>
-            <div class="p3-ans-row">
-                <div class="p3-num">2.</div>
-                <div class="p3-ans-box"><div class="p3-ans-text" id="ans2"></div></div>
+            <div class="p4-sec" data-p4key="p4-sec-early">早debuff</div>
+            <div class="p4-ans-row">
+                <div class="p4-num">2.</div>
+                <div class="p4-ans-box"><div class="p4-ans-text" id="ans2"></div></div>
             </div>
-            <div class="p3-ans-row">
-                <div class="p3-num">3.</div>
-                <div class="p3-ans-box"><div class="p3-ans-text" id="ans3"></div></div>
+            <div class="p4-ans-row">
+                <div class="p4-num">3.</div>
+                <div class="p4-ans-box"><div class="p4-ans-text" id="ans3"></div></div>
             </div>
-            <div class="p3-ans-row">
-                <div class="p3-num fire-num" id="num4label">火</div>
-                <div class="p3-ans-box"><div class="p3-ans-text" id="ans4"></div></div>
-            </div>
-
-            <div class="p3-div"></div>
-
-            <div class="p3-sec" data-p3key="p3-sec-late">晚debuff</div>
-            <div class="p3-ans-row">
-                <div class="p3-num">5.</div>
-                <div class="p3-ans-box"><div class="p3-ans-text" id="ans5"></div></div>
-            </div>
-            <div class="p3-ans-row">
-                <div class="p3-num">6.</div>
-                <div class="p3-ans-box"><div class="p3-ans-text" id="ans6"></div></div>
-            </div>
-            <div class="p3-ans-row">
-                <div class="p3-num water-num" id="num7label">水</div>
-                <div class="p3-ans-box"><div class="p3-ans-text" id="ans7"></div></div>
+            <div class="p4-ans-row">
+                <div class="p4-num fire-num" id="num4label">火</div>
+                <div class="p4-ans-box"><div class="p4-ans-text" id="ans4"></div></div>
             </div>
 
-            <div class="p3-sec" data-p3key="p3-sec-magic">魔法放出</div>
-            <div class="p3-ans-row">
-                <div class="p3-num">8.</div>
-                <div class="p3-ans-box"><div class="p3-ans-text" id="ans8"></div></div>
+            <div class="p4-div"></div>
+
+            <div class="p4-sec" data-p4key="p4-sec-late">晚debuff</div>
+            <div class="p4-ans-row">
+                <div class="p4-num">5.</div>
+                <div class="p4-ans-box"><div class="p4-ans-text" id="ans5"></div></div>
+            </div>
+            <div class="p4-ans-row">
+                <div class="p4-num">6.</div>
+                <div class="p4-ans-box"><div class="p4-ans-text" id="ans6"></div></div>
+            </div>
+            <div class="p4-ans-row">
+                <div class="p4-num water-num" id="num7label">水</div>
+                <div class="p4-ans-box"><div class="p4-ans-text" id="ans7"></div></div>
+            </div>
+
+            <div class="p4-sec" data-p4key="p4-sec-magic">魔法放出</div>
+            <div class="p4-ans-row">
+                <div class="p4-num">8.</div>
+                <div class="p4-ans-box"><div class="p4-ans-text" id="ans8"></div></div>
             </div>
         </div>
 
@@ -277,65 +278,65 @@
         <div></div>
 
         <!-- RIGHT: Button column -->
-        <div class="p3-btn-col">
-            <div class="p3-btn-sec" data-p3key="p3-sec-gc1">GC1</div>
-            <div class="p3-btn-row">
-                <button class="p3-btn" data-btn="A" onclick="p3Click('A')"><div class="dot-blue"></div></button>
-                <button class="p3-btn" data-btn="B" onclick="p3Click('B')"><div class="q-red">?</div></button>
+        <div class="p4-btn-col">
+            <div class="p4-btn-sec" data-p4key="p4-sec-gc1">GC1</div>
+            <div class="p4-btn-row">
+                <button class="p4-btn" data-btn="A" onclick="p4Click('A')"><div class="dot-blue"></div></button>
+                <button class="p4-btn" data-btn="B" onclick="p4Click('B')"><div class="q-red">?</div></button>
             </div>
-            <div class="p3-btn-row">
-                <button class="p3-btn" data-btn="C" onclick="p3Click('C')" id="btnC">早</button>
-                <button class="p3-btn" data-btn="D" onclick="p3Click('D')" id="btnD">晚</button>
+            <div class="p4-btn-row">
+                <button class="p4-btn" data-btn="C" onclick="p4Click('C')" id="btnC">早</button>
+                <button class="p4-btn" data-btn="D" onclick="p4Click('D')" id="btnD">晚</button>
             </div>
-            <div class="p3-half-row">
-                <button class="p3-btn" data-btn="E" onclick="p3Click('E')">⚡</button>
+            <div class="p4-half-row">
+                <button class="p4-btn" data-btn="E" onclick="p4Click('E')"><img class="btn-img" src="data:image/webp;base64,UklGRgYEAABXRUJQVlA4WAoAAAAQAAAAJwAALwAAQUxQSKoBAAABuTJE9D8gV5IkRbKyunrgmJlJPO3s/l89e9ITmXF5FoYa6uGQ+pSICZiAo/ceXVkV06BNZ2HkhScv3NugWSUHiGiMCNAiWmHggZZYyBkWtMliqzatSN1xMiXPA09pzFNACazYxNYYKUchQERjRIDnsVUxsIgCrQvClIIIMdEaCE8IINBNAqIj/y8LIB1h4HSCQIQYFmmPKJ4VYJ4QLREFctY3kU0hxyOtCEUrjOWe83YcWsdKjteYwkJOqmcs8MxE5NSpZY5HGhMKS330nbfljYGEs2rbvgPLvJIjahEWUVI//DAyx7asSA199cHMmmuntmhEIaIGEZ5nTXzyzsyaExGAwlDfgKUoSw4c2aZZhlOBhbRSz2c/pECJMAIAILzE0FffOHvO7FqhBRiIvxBiGcbcd5/0sGPLoOLE0NiMYWnrjhzaoFgOADBNJL76JMEiIQUqC6OU+KFnQduxZ9sSTSMgLGNhoqfH27aPQW1rJDEzl3Ji27asCIA119djxDasCSnQZCEz0TdWCqyIMHAKc4XQng0xAo2KnLEwk5jLOQJAW7FpCSEEqgJWUDggNgIAAJALAJ0BKigAMAA+bSySRyQiIaEqtV1QgA2JbACdMu0BDIirHazDeQntuLdwG89z69n8Y+zVzdat+dLUMomQX33XaDTQIW2MQAgBAbTPXMpnup6tizhm/noLhKxBaFWn7HQDRywwAP79uvf8+P/XE+BN4si+Nu9FzRXgL4DKHfw99Bej7SsZfUgb8ULY/raMHZOGkEjHp1qVz2cLrS+xACEHcIFV6x017V0suk6WiZGZ04s9dI9+Tdfa1RLhn9OCbKNq5Kb8wc6m1ZFBauMMKFC5q6mV5kSlYnInu6RW0CIcmGNAtmFcGdnk5EB8MwFYNcK/yv3xG//6dAfWlAm5ih05xl+7nWcPdkDRVHwMv5uNOOfeKan7P4Es/e/4awObJR7Tq6YBca371oafr4Aqdt5ruJSs6OAvWRmso5ufyHrGpbj4bGsxAqA9yMBBeTtd0Ju8kSn5rbPibKRPurPvI5lJswENsPEaDWTLRZJawjsRvqOKXtua+ukcvQJDKEuOHvcK5zykkQHKAS7kBw/euCjnEohX3pcLq4AW+nS5k6cG7GOBGfv6/efv8c9QD9+iCJXZWQVPUT3D1KKWSX3WmshTU66uL6Ly50SBbGozYMiBXV77drZ4lWHMsyi+pEKLlVz7IAminsOzMy9hT+wvdzmeZV1znlbkJCUwkNGV9C0XV/0JZOAdSoQi82a7nJ9ItE+bl9VEoYQVyVAAUBRoQzlebGkh2Z9oRVbgmX6Ta49fctsMAAAA"></button>
                 <div></div>
             </div>
 
-            <div class="p3-div"></div>
+            <div class="p4-div"></div>
 
-            <div class="p3-btn-sec" data-p3key="p3-sec-waterfire1">水火1</div>
-            <div class="p3-btn-row">
-                <button class="p3-btn" data-btn="F" onclick="p3Click('F')"><div class="dot-blue"></div></button>
-                <button class="p3-btn" data-btn="G" onclick="p3Click('G')"><div class="q-red">?</div></button>
+            <div class="p4-btn-sec" data-p4key="p4-sec-waterfire1">水火1</div>
+            <div class="p4-btn-row">
+                <button class="p4-btn" data-btn="F" onclick="p4Click('F')"><div class="dot-blue"></div></button>
+                <button class="p4-btn" data-btn="G" onclick="p4Click('G')"><div class="q-red">?</div></button>
             </div>
-            <div class="p3-btn-row">
-                <button class="p3-btn" data-btn="I" onclick="p3Click('I')">💧</button>
-                <button class="p3-btn" data-btn="H" onclick="p3Click('H')">🔥</button>
+            <div class="p4-btn-row">
+                <button class="p4-btn" data-btn="I" onclick="p4Click('I')"><img class="btn-img" src="data:image/webp;base64,UklGRooEAABXRUJQVlA4WAoAAAAQAAAAJwAALwAAQUxQSJgAAAABgGJt27LoTegCaN59Fw6RxAIcslMdmm7AJbtrc51ptHF3n/n+L0+IiAl4vc61llOCF7Hy46G/uX/DMH38Zj+84fiUbj6+4fnovsHkLX75b80TNlfY8CuY5ABMNzjc6ACAmybsMcqCbzUrQq59PPiZFCAgwYTf21CdaOHPXjRDPiDUowjQAan06C85CaBmpE4vfjy/mCjg91ZQOCDMAwAAkBEAnQEqKAAwAD5tKpJGpCIhoS47+ACADYloAJ0zTAYRQr0L4uBFty+dj0zP0AOlZn1/ID7HkHnCfTP9Pwg7Wm7PZU4iPqr5of+045IwroQ+nf2E+A79bP98mDv19gsZb09Fdsp6eSIZHmX/yigVrWClUhDh+QdPQeDG6mO9chWuW0qtwHOyhmX/pz0C+vEJnls2GQAA/u+PcH+C3xxJGPdUUwarL/0akmSbKwPY/v/HMzcoOZS99mNOeSRoYxO7e1CdRMfksltkym3yOZt/2HXG+T8MfLYaskjIHRPxX9b+4c1EnUq9YyMPLmziv/IVPJshNnUZRqVC3KlQytpxkwtf9btDX6gGcRmnkT9u0GG491P3RNYVa8/Yu66OBc/DxT3vq9/8f6cW4/73o4wilo9gE1mJW5Udq0xfHgpPBnr/k9zEuJQ8/cEO1bzluIQqtz8Gh8uHrz1/0NtH7ga8YVx02myn2/lwC4f5qhBj/IKBLCJeWqn+NsU79UsUm2Wr1oppZSRvr24VedYU1vK7reUlPBZ7Zt4dysQvQQ9c6HlTxx/2+OCumU1J7pcPsA1Z87+LjlbjhQEmz+PJiZw3/+f8iqr+8Uifs5MO0+FwhMkxwJYW9T3WANGJrbaox8UZKyHCPVn5I53m2Me2cdm18E3fEIwkaekUPXIgPy6+ac87H2ElujsqHlG+t8dYgxckD8vaiS76n39/Ehc80pKPDMlpagUq+nHs0gf+WK5j7m996lT2xmVUBj57kW9SwHio+rG/RPgOBs2udd+g9llw6UeLfDn0pSrCCOu8cgKBlIZXObbsOO4dXGzv91tx244qZp7ixmXCkCp1PTip1B/eywGUSs47LJxmkrU8NDgl4QkBcZbliEabwcMaMFVY4+R1FkNC6Wna/wV53rw2l6DPziDfN/tUJ07Dv+5dCgryOOYYql/x2id/WNjFXyInBPhbyeuCN6as98V/Ag+RIrzcNm9OH9+Kb60ytueWpSE2xPJIsD9eVOKEYO8X5onwOniVeIDlof8L5MXLfAsFUtmr8jDh1sYRcquLF9bw2mMNylQOSWUEZGrD2dgq/7xEtQsc6nG2kPZdiO9ct10HEQ/Zr27N9K4Ww0GpX/r0uai5CR8so0ebNFmbuiWvJBPkIHEM4WLD2sBmxviPMx6AR5Furax7T1R/a86m8j1xhxR2DPXAX3+gKSBHyXz/fRDPi249xx3aqtLzqsRb463V8c0Ff2hMX6wW//x05OUE5ePu1XOHWZfw9ZDXoZSCeUibceEUCAaJl686VkcJKWAA"></button>
+                <button class="p4-btn" data-btn="H" onclick="p4Click('H')"><img class="btn-img" src="data:image/webp;base64,UklGRl4EAABXRUJQVlA4WAoAAAAQAAAAJwAALwAAQUxQSJQAAAABgGLb1vLmhhOXGTBzoqNjmSQzc0qOYSJcxa6rU+AqJsdVzN/36YqImAAgsLq6THljyQgg9sbitQrpNzbPZW+sHjLD7t2/NfejL4y8wbLAxjQAzza9TRe+8oce6dyU8bN+kcasAr/275A6DOOvgoEnEs/DEhDULv5tywnC0aPfPTVBXjr1mxklqNqK6Xy12qx33PgjVlA4IKQDAABQEQCdASooADAAPm0uj0WkIqEXHf5kQAbEtgBOmXjh89j8yKtf4T778XyXqEntuvMB5tPo53kD0AOlU8pmsQcxfriTG2XYBeDXeDK44EfU3WRTD2ix6sPZbknh2B0Bag87PP3Gpr+ABVzDoiK0+Lh9TCunaVBMBKFewUO8/y9liS222EtHJOqR1312L/+sbPcF8AAA/vTB3H67Nf8Yv+GHSX70wi8SiH/Ef902aUpQQp9Vx3rH/zvhLZ87s71VubCNKLtngBmUka3zr1dQr3r5P6yao6MmJFaqA2ePNbIxOPU1D0HfnEdqIj/+slawsdwy0U+HpZv2AG91+mA5WmdocZtoEHAc9ToxpKGYaXFa0T4juenJqMPGQtt/NyL7Dr4HDaXzTz1uJf7h0MdV9K+N2mJyDSxqPfIJQVh2v6wMonH8wH6gD81qj1laUfcaDKGJvfamKPgcXPO2OJphp+BpAt1/oeWPlD7TsjDK+zFZVb2HjCAJiNI9t/gbRmsgnfgsgp9z7XWvY+vH7tNCK5X61L9LfWKhCZtJTtOjY4GtrxszOF/5EsUsruqd0ji/8b15ZK8dzrSJSTSpLrtCSdTM3LX8dT4A5XhwiOuZ+zlqFnv6irp/KdxXtpjqHqnR9DUfHCVfc10V21juQURIfHYZMn6hOTSstKBAIS4FDynmsTMrmiLcSPKgycxTA/Uqa0H5kG6etFQ0F7F86RR4M1cHzXf5BN+AvS5N3Wq/tm7HK5zYGyZQ+mEUjg5rDELKPfkcgx+eQ430/i/Z9s8enB7FxDwQOEeEkJOtD5b1fRLyTpZ1nBNZDMi88q0mxR8NPKE0SS8x3dwZmdhn4D6qwz05PNCB9yoJC+hHRuAtsHgV8+za4k+9+B25qxQ1Q5IOIbhoChMaTMHcX9BAY6ysl00BaDLt9v//mj1u6ab+9B2m+MKFXrZu7AnwqocHiKjnfu92/x580HaAFFh+X+uQvl/eCDNmqGqhFAqsGQvWZjH3mNUjDnH4ta3WQFwtb7C/Ns1gY+P80UDKAtpeYtcWU8NMR6W/7PtgVkoRoFYkv/x08z+OtGlwZE8IKm4wx4VbxHhTIrmgonJ7y+ubbe1pfmAanolsKrKOXB9xbOHo8yOQyCLXMjUUnmLYTyfoo+molNVLjELp1f7sEoZ/lIB5NW95fm39azX+JjLcfIeJAZu9VIx1h7bPeHVpL+ASPPmOGr3+IvN6O/4s77wV5fWJJ2mBQWSAAA=="></button>
             </div>
 
-            <div class="p3-div"></div>
+            <div class="p4-div"></div>
 
-            <div class="p3-btn-sec" data-p3key="p3-sec-gc2">GC2</div>
-            <div class="p3-btn-row">
-                <button class="p3-btn" data-btn="J" onclick="p3Click('J')"><div class="dot-blue"></div></button>
-                <button class="p3-btn" data-btn="K" onclick="p3Click('K')"><div class="q-red">?</div></button>
+            <div class="p4-btn-sec" data-p4key="p4-sec-gc2">GC2</div>
+            <div class="p4-btn-row">
+                <button class="p4-btn" data-btn="J" onclick="p4Click('J')"><div class="dot-blue"></div></button>
+                <button class="p4-btn" data-btn="K" onclick="p4Click('K')"><div class="q-red">?</div></button>
             </div>
-            <div class="p3-half-row">
-                <button class="p3-btn" data-btn="L" onclick="p3Click('L')">⚡</button>
+            <div class="p4-half-row">
+                <button class="p4-btn" data-btn="L" onclick="p4Click('L')"><img class="btn-img" src="data:image/webp;base64,UklGRgYEAABXRUJQVlA4WAoAAAAQAAAAJwAALwAAQUxQSKoBAAABuTJE9D8gV5IkRbKyunrgmJlJPO3s/l89e9ITmXF5FoYa6uGQ+pSICZiAo/ceXVkV06BNZ2HkhScv3NugWSUHiGiMCNAiWmHggZZYyBkWtMliqzatSN1xMiXPA09pzFNACazYxNYYKUchQERjRIDnsVUxsIgCrQvClIIIMdEaCE8IINBNAqIj/y8LIB1h4HSCQIQYFmmPKJ4VYJ4QLREFctY3kU0hxyOtCEUrjOWe83YcWsdKjteYwkJOqmcs8MxE5NSpZY5HGhMKS330nbfljYGEs2rbvgPLvJIjahEWUVI//DAyx7asSA199cHMmmuntmhEIaIGEZ5nTXzyzsyaExGAwlDfgKUoSw4c2aZZhlOBhbRSz2c/pECJMAIAILzE0FffOHvO7FqhBRiIvxBiGcbcd5/0sGPLoOLE0NiMYWnrjhzaoFgOADBNJL76JMEiIQUqC6OU+KFnQduxZ9sSTSMgLGNhoqfH27aPQW1rJDEzl3Ji27asCIA119djxDasCSnQZCEz0TdWCqyIMHAKc4XQng0xAo2KnLEwk5jLOQJAW7FpCSEEqgJWUDggNgIAAJALAJ0BKigAMAA+bSySRyQiIaEqtV1QgA2JbACdMu0BDIirHazDeQntuLdwG89z69n8Y+zVzdat+dLUMomQX33XaDTQIW2MQAgBAbTPXMpnup6tizhm/noLhKxBaFWn7HQDRywwAP79uvf8+P/XE+BN4si+Nu9FzRXgL4DKHfw99Bej7SsZfUgb8ULY/raMHZOGkEjHp1qVz2cLrS+xACEHcIFV6x017V0suk6WiZGZ04s9dI9+Tdfa1RLhn9OCbKNq5Kb8wc6m1ZFBauMMKFC5q6mV5kSlYnInu6RW0CIcmGNAtmFcGdnk5EB8MwFYNcK/yv3xG//6dAfWlAm5ih05xl+7nWcPdkDRVHwMv5uNOOfeKan7P4Es/e/4awObJR7Tq6YBca371oafr4Aqdt5ruJSs6OAvWRmso5ufyHrGpbj4bGsxAqA9yMBBeTtd0Ju8kSn5rbPibKRPurPvI5lJswENsPEaDWTLRZJawjsRvqOKXtua+ukcvQJDKEuOHvcK5zykkQHKAS7kBw/euCjnEohX3pcLq4AW+nS5k6cG7GOBGfv6/efv8c9QD9+iCJXZWQVPUT3D1KKWSX3WmshTU66uL6Ly50SBbGozYMiBXV77drZ4lWHMsyi+pEKLlVz7IAminsOzMy9hT+wvdzmeZV1znlbkJCUwkNGV9C0XV/0JZOAdSoQi82a7nJ9ItE+bl9VEoYQVyVAAUBRoQzlebGkh2Z9oRVbgmX6Ta49fctsMAAAA"></button>
                 <div></div>
             </div>
 
-            <div class="p3-div"></div>
+            <div class="p4-div"></div>
 
-            <div class="p3-btn-sec" data-p3key="p3-sec-waterfire2">水火2</div>
-            <div class="p3-btn-row">
-                <button class="p3-btn" data-btn="M" onclick="p3Click('M')"><div class="dot-blue"></div></button>
-                <button class="p3-btn" data-btn="N" onclick="p3Click('N')"><div class="q-red">?</div></button>
+            <div class="p4-btn-sec" data-p4key="p4-sec-waterfire2">水火2</div>
+            <div class="p4-btn-row">
+                <button class="p4-btn" data-btn="M" onclick="p4Click('M')"><div class="dot-blue"></div></button>
+                <button class="p4-btn" data-btn="N" onclick="p4Click('N')"><div class="q-red">?</div></button>
             </div>
 
-            <div class="p3-div"></div>
+            <div class="p4-div"></div>
 
-            <div class="p3-btn-sec" data-p3key="p3-sec-thunder">雷直線</div>
-            <div class="p3-btn-row">
-                <button class="p3-btn" data-btn="O" onclick="p3Click('O')"><div class="dot-blue"></div></button>
-                <button class="p3-btn" data-btn="P" onclick="p3Click('P')"><div class="q-red">?</div></button>
+            <div class="p4-btn-sec" data-p4key="p4-sec-thunder">雷直線</div>
+            <div class="p4-btn-row">
+                <button class="p4-btn" data-btn="O" onclick="p4Click('O')"><div class="dot-blue"></div></button>
+                <button class="p4-btn" data-btn="P" onclick="p4Click('P')"><div class="q-red">?</div></button>
             </div>
 
-            <div class="p3-btn-sec" data-p3key="p3-sec-ice">冰扇形</div>
-            <div class="p3-btn-row">
-                <button class="p3-btn" data-btn="Q" onclick="p3Click('Q')"><div class="dot-blue"></div></button>
-                <button class="p3-btn" data-btn="R" onclick="p3Click('R')"><div class="q-red">?</div></button>
+            <div class="p4-btn-sec" data-p4key="p4-sec-ice">冰扇形</div>
+            <div class="p4-btn-row">
+                <button class="p4-btn" data-btn="Q" onclick="p4Click('Q')"><div class="dot-blue"></div></button>
+                <button class="p4-btn" data-btn="R" onclick="p4Click('R')"><div class="q-red">?</div></button>
             </div>
         </div>
     </div>
@@ -347,43 +348,43 @@
     <script>
     const i18n = {
         zh: {
-            "title": "🤡 UMAD P3",
-            "p3-sec-bomb": "炸彈", "p3-sec-early": "早debuff", "p3-sec-late": "晚debuff",
-            "p3-sec-magic": "魔法放出", "p3-sec-gc1": "GC1", "p3-sec-waterfire1": "水火1",
-            "p3-sec-gc2": "GC2", "p3-sec-waterfire2": "水火2",
-            "p3-sec-thunder": "雷直線", "p3-sec-ice": "冰扇形",
-            "p3-btn-c": "早", "p3-btn-d": "晚", "p3-num-4": "火", "p3-num-7": "水",
-            "p3-stop": "不要動", "p3-move": "動起來",
-            "p3-thunder-out": "雷散開", "p3-water-out": "水散開",
-            "p3-lookaway": "不要看", "p3-lookat": "要看",
-            "p3-out": "鋼鐵", "p3-in": "月環",
-            "p3-avoid-both": "都不要踩", "p3-cone": "踩扇形", "p3-line": "踩直線", "p3-both": "都踩"
+            "title": "🤡 絕妖星 P4",
+            "p4-sec-bomb": "炸彈", "p4-sec-early": "早debuff", "p4-sec-late": "晚debuff",
+            "p4-sec-magic": "魔法放出", "p4-sec-gc1": "GC1", "p4-sec-waterfire1": "水火1",
+            "p4-sec-gc2": "GC2", "p4-sec-waterfire2": "水火2",
+            "p4-sec-thunder": "雷直線", "p4-sec-ice": "冰扇形",
+            "p4-btn-c": "早", "p4-btn-d": "晚", "p4-num-4": "火", "p4-num-7": "水",
+            "p4-stop": "不要動", "p4-move": "動起來",
+            "p4-thunder-out": "雷散開", "p4-water-out": "水散開",
+            "p4-lookaway": "不要看", "p4-lookat": "要看",
+            "p4-out": "鋼鐵", "p4-in": "月環",
+            "p4-avoid-both": "都不要踩", "p4-cone": "踩扇形", "p4-line": "踩直線", "p4-both": "都踩"
         },
         jp: {
-            "title": "🤡 UMAD P3",
-            "p3-sec-bomb": "爆弾", "p3-sec-early": "早デバフ", "p3-sec-late": "遅デバフ",
-            "p3-sec-magic": "マジックアウト", "p3-sec-gc1": "GC1", "p3-sec-waterfire1": "水炎1",
-            "p3-sec-gc2": "GC2", "p3-sec-waterfire2": "水炎2",
-            "p3-sec-thunder": "直線", "p3-sec-ice": "扇",
-            "p3-btn-c": "早", "p3-btn-d": "遅", "p3-num-4": "炎", "p3-num-7": "水",
-            "p3-stop": "止まる", "p3-move": "動き続ける",
-            "p3-thunder-out": "雷散開", "p3-water-out": "水散開",
-            "p3-lookaway": "見ない", "p3-lookat": "見る",
-            "p3-out": "タケノコ", "p3-in": "ドーナツ",
-            "p3-avoid-both": "踏まない", "p3-cone": "扇踏む", "p3-line": "線踏む", "p3-both": "両方踏む"
+            "title": "🤡 絶妖星 P4",
+            "p4-sec-bomb": "爆弾", "p4-sec-early": "早デバフ", "p4-sec-late": "遅デバフ",
+            "p4-sec-magic": "マジックアウト", "p4-sec-gc1": "GC1", "p4-sec-waterfire1": "水炎1",
+            "p4-sec-gc2": "GC2", "p4-sec-waterfire2": "水炎2",
+            "p4-sec-thunder": "直線", "p4-sec-ice": "扇",
+            "p4-btn-c": "早", "p4-btn-d": "遅", "p4-num-4": "炎", "p4-num-7": "水",
+            "p4-stop": "止まる", "p4-move": "動き続ける",
+            "p4-thunder-out": "雷散開", "p4-water-out": "水散開",
+            "p4-lookaway": "見ない", "p4-lookat": "見る",
+            "p4-out": "タケノコ", "p4-in": "ドーナツ",
+            "p4-avoid-both": "踏まない", "p4-cone": "扇踏む", "p4-line": "線踏む", "p4-both": "両方踏む"
         },
         en: {
-            "title": "🤡 UMAD P3",
-            "p3-sec-bomb": "Bomb", "p3-sec-early": "Short Debuffs", "p3-sec-late": "Long Debuffs",
-            "p3-sec-magic": "Mana Release", "p3-sec-gc1": "GC1", "p3-sec-waterfire1": "Entropy/Fluid 1",
-            "p3-sec-gc2": "GC2", "p3-sec-waterfire2": "Entropy/Fluid 2",
-            "p3-sec-thunder": "Line", "p3-sec-ice": "Cone",
-            "p3-btn-c": "S", "p3-btn-d": "L", "p3-num-4": "4.", "p3-num-7": "7.",
-            "p3-stop": "STOP", "p3-move": "MOVE",
-            "p3-thunder-out": "Lightning Out", "p3-water-out": "Water Out",
-            "p3-lookaway": "Look Away", "p3-lookat": "Look At",
-            "p3-out": "Out", "p3-in": "In",
-            "p3-avoid-both": "Avoid Both", "p3-cone": "Stand in Cone", "p3-line": "Stand in Line", "p3-both": "Both"
+            "title": "🤡 DMU P4",
+            "p4-sec-bomb": "Bomb", "p4-sec-early": "Short Debuffs", "p4-sec-late": "Long Debuffs",
+            "p4-sec-magic": "Mana Release", "p4-sec-gc1": "GC1", "p4-sec-waterfire1": "Entropy/Fluid 1",
+            "p4-sec-gc2": "GC2", "p4-sec-waterfire2": "Entropy/Fluid 2",
+            "p4-sec-thunder": "Line", "p4-sec-ice": "Cone",
+            "p4-btn-c": "S", "p4-btn-d": "L", "p4-num-4": "4.", "p4-num-7": "7.",
+            "p4-stop": "STOP", "p4-move": "MOVE",
+            "p4-thunder-out": "Lightning Out", "p4-water-out": "Water Out",
+            "p4-lookaway": "Look Away", "p4-lookat": "Look At",
+            "p4-out": "Out", "p4-in": "In",
+            "p4-avoid-both": "Avoid Both", "p4-cone": "Stand in Cone", "p4-line": "Stand in Line", "p4-both": "Both"
         }
     };
 
@@ -396,15 +397,15 @@
             btn.classList.toggle('active', btn.innerText.toLowerCase() === lang));
         const t = i18n[lang];
         document.getElementById('ui-title').innerText = t['title'];
-        document.getElementById('btnC').innerText = t['p3-btn-c'];
-        document.getElementById('btnD').innerText = t['p3-btn-d'];
-        document.getElementById('num4label').innerText = t['p3-num-4'];
-        document.getElementById('num7label').innerText = t['p3-num-7'];
-        document.querySelectorAll('[data-p3key]').forEach(el => {
-            const v = t[el.dataset.p3key];
+        document.getElementById('btnC').innerText = t['p4-btn-c'];
+        document.getElementById('btnD').innerText = t['p4-btn-d'];
+        document.getElementById('num4label').innerText = t['p4-num-4'];
+        document.getElementById('num7label').innerText = t['p4-num-7'];
+        document.querySelectorAll('[data-p4key]').forEach(el => {
+            const v = t[el.dataset.p4key];
             if (v !== undefined) el.innerText = v;
         });
-        p3Recalculate();
+        p4Recalculate();
     }
 
     /* ── P3 Logic ── */
@@ -414,78 +415,78 @@
     const GROUP_OP = ['O','P'];
     const GROUP_QR = ['Q','R'];
 
-    const p3State = {
+    const p4State = {
         A:false,B:false,C:false,D:false,E:false,F:false,G:false,
         H:false,I:false,J:false,K:false,L:false,M:false,N:false,
         O:true, P:false, Q:true, R:false
     };
 
-    function p3Click(name) {
+    function p4Click(name) {
         if (GROUP_OP.includes(name) || GROUP_QR.includes(name)) {
             handleDefaultGroup(name, GROUP_OP.includes(name) ? GROUP_OP : GROUP_QR);
         } else {
-            if (p3State[name]) { p3State[name] = false; }
+            if (p4State[name]) { p4State[name] = false; }
             else {
                 for (const grp of MUTEX_GROUPS)
-                    if (grp.includes(name)) grp.forEach(g => p3State[g] = false);
-                p3State[name] = true;
+                    if (grp.includes(name)) grp.forEach(g => p4State[g] = false);
+                p4State[name] = true;
             }
         }
-        p3Recalculate();
-        p3Render();
+        p4Recalculate();
+        p4Render();
     }
 
     function handleDefaultGroup(name, group) {
-        if (p3State[name]) {
+        if (p4State[name]) {
             if (name === group[0]) return;
-            p3State[name] = false;
-            p3State[group[0]] = true;
+            p4State[name] = false;
+            p4State[group[0]] = true;
         } else {
-            group.forEach(g => p3State[g] = false);
-            p3State[name] = true;
+            group.forEach(g => p4State[g] = false);
+            p4State[name] = true;
         }
     }
 
-    const is = n => p3State[n];
+    const is = n => p4State[n];
     const T  = k => (i18n[currentLang] || i18n.zh)[k] || '';
 
-    function p3Recalculate() {
+    function p4Recalculate() {
         const ans = Array(9).fill('');
-        if      (is('E')&&is('A')) ans[1]=T('p3-stop');
-        else if (is('E')&&is('B')) ans[1]=T('p3-move');
-        else if (is('L')&&is('J')) ans[1]=T('p3-stop');
-        else if (is('L')&&is('K')) ans[1]=T('p3-move');
+        if      (is('E')&&is('A')) ans[1]=T('p4-stop');
+        else if (is('E')&&is('B')) ans[1]=T('p4-move');
+        else if (is('L')&&is('J')) ans[1]=T('p4-stop');
+        else if (is('L')&&is('K')) ans[1]=T('p4-move');
 
-        if      (is('C')&&is('A')) ans[2]=T('p3-thunder-out');
-        else if (is('C')&&is('B')) ans[2]=T('p3-water-out');
-        else if (is('D')&&is('J')) ans[2]=T('p3-thunder-out');
-        else if (is('D')&&is('K')) ans[2]=T('p3-water-out');
+        if      (is('C')&&is('A')) ans[2]=T('p4-thunder-out');
+        else if (is('C')&&is('B')) ans[2]=T('p4-water-out');
+        else if (is('D')&&is('J')) ans[2]=T('p4-thunder-out');
+        else if (is('D')&&is('K')) ans[2]=T('p4-water-out');
 
-        if      (is('A')) ans[3]=T('p3-lookaway');
-        else if (is('B')) ans[3]=T('p3-lookat');
+        if      (is('A')) ans[3]=T('p4-lookaway');
+        else if (is('B')) ans[3]=T('p4-lookat');
 
-        if      (is('H')&&is('F')) ans[4]=T('p3-out');
-        else if (is('H')&&is('G')) ans[4]=T('p3-in');
-        else if (is('M')&&is('I')) ans[4]=T('p3-out');
-        else if (is('N')&&is('I')) ans[4]=T('p3-in');
+        if      (is('H')&&is('F')) ans[4]=T('p4-out');
+        else if (is('H')&&is('G')) ans[4]=T('p4-in');
+        else if (is('M')&&is('I')) ans[4]=T('p4-out');
+        else if (is('N')&&is('I')) ans[4]=T('p4-in');
 
-        if      (is('D')&&is('A')) ans[5]=T('p3-thunder-out');
-        else if (is('D')&&is('B')) ans[5]=T('p3-water-out');
-        else if (is('C')&&is('J')) ans[5]=T('p3-thunder-out');
-        else if (is('C')&&is('K')) ans[5]=T('p3-water-out');
+        if      (is('D')&&is('A')) ans[5]=T('p4-thunder-out');
+        else if (is('D')&&is('B')) ans[5]=T('p4-water-out');
+        else if (is('C')&&is('J')) ans[5]=T('p4-thunder-out');
+        else if (is('C')&&is('K')) ans[5]=T('p4-water-out');
 
-        if      (is('J')) ans[6]=T('p3-lookaway');
-        else if (is('K')) ans[6]=T('p3-lookat');
+        if      (is('J')) ans[6]=T('p4-lookaway');
+        else if (is('K')) ans[6]=T('p4-lookat');
 
-        if      (is('I')&&is('F')) ans[7]=T('p3-in');
-        else if (is('I')&&is('G')) ans[7]=T('p3-out');
-        else if (is('M')&&is('H')) ans[7]=T('p3-in');
-        else if (is('N')&&is('H')) ans[7]=T('p3-out');
+        if      (is('I')&&is('F')) ans[7]=T('p4-in');
+        else if (is('I')&&is('G')) ans[7]=T('p4-out');
+        else if (is('M')&&is('H')) ans[7]=T('p4-in');
+        else if (is('N')&&is('H')) ans[7]=T('p4-out');
 
-        if      (is('O')&&is('Q')) ans[8]=T('p3-avoid-both');
-        else if (is('O')&&is('R')) ans[8]=T('p3-cone');
-        else if (is('P')&&is('Q')) ans[8]=T('p3-line');
-        else if (is('P')&&is('R')) ans[8]=T('p3-both');
+        if      (is('O')&&is('Q')) ans[8]=T('p4-avoid-both');
+        else if (is('O')&&is('R')) ans[8]=T('p4-cone');
+        else if (is('P')&&is('Q')) ans[8]=T('p4-line');
+        else if (is('P')&&is('R')) ans[8]=T('p4-both');
 
         for (let i = 1; i <= 8; i++) {
             const el = document.getElementById('ans'+i);
@@ -493,21 +494,21 @@
         }
     }
 
-    function p3Render() {
-        document.querySelectorAll('.p3-btn[data-btn]').forEach(btn =>
-            btn.classList.toggle('active', !!p3State[btn.dataset.btn]));
+    function p4Render() {
+        document.querySelectorAll('.p4-btn[data-btn]').forEach(btn =>
+            btn.classList.toggle('active', !!p4State[btn.dataset.btn]));
     }
 
     function resetAll() {
-        'ABCDEFGHIJKLMN'.split('').forEach(n => p3State[n] = false);
-        p3State.O=true; p3State.P=false;
-        p3State.Q=true; p3State.R=false;
-        p3Recalculate();
-        p3Render();
+        'ABCDEFGHIJKLMN'.split('').forEach(n => p4State[n] = false);
+        p4State.O=true; p4State.P=false;
+        p4State.Q=true; p4State.R=false;
+        p4Recalculate();
+        p4Render();
     }
 
-    p3Render();
-    p3Recalculate();
+    p4Render();
+    p4Recalculate();
     </script>
 </body>
 </html>
